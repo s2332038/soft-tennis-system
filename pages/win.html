@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>得点記録</title>
+
+    <link rel="stylesheet"
+          href="../style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>得点記録</h1>
+
+    <!-- スコア表示 -->
+
+    <div class="score-board">
+
+        <div class="score-box">
+
+            <h2>ゲームカウント</h2>
+
+            <div id="gameCount">
+                0 : 0
+            </div>
+
+        </div>
+
+        <div class="score-box">
+
+            <h2>ポイント</h2>
+
+            <div id="pointCount">
+                0 : 0
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- 得点した人 -->
+
+    <div class="card">
+
+        <h2>得点した人</h2>
+
+        <div class="button-row">
+
+            <button
+                class="btn player-btn"
+                data-value="後衛">
+
+                後衛
+
+            </button>
+
+            <button
+                class="btn player-btn"
+                data-value="前衛">
+
+                前衛
+
+            </button>
+
+            <button
+                class="btn player-btn"
+                data-value="なし">
+
+                なし
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- 得点要因 -->
+
+    <div class="card">
+
+        <h2>得点要因</h2>
+
+        <div class="button-grid">
+
+            <button class="btn reason-btn" data-value="サーブ">
+                サーブ
+            </button>
+
+            <button class="btn reason-btn" data-value="レシーブ">
+                レシーブ
+            </button>
+
+            <button class="btn reason-btn" data-value="ボレー">
+                ボレー
+            </button>
+
+            <button class="btn reason-btn" data-value="ポーチ">
+                ポーチ
+            </button>
+
+            <button class="btn reason-btn" data-value="浮き球">
+                浮き球
+            </button>
+
+            <button class="btn reason-btn" data-value="パッシング">
+                パッシング
+            </button>
+
+            <button class="btn reason-btn" data-value="ロブ">
+                ロブ
+            </button>
+
+            <button class="btn reason-btn" data-value="相手のミス">
+                相手のミス
+            </button>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+
+                その他
+
+            </label>
+
+            <input
+                type="text"
+                id="otherReason"
+                placeholder="自由入力">
+
+        </div>
+
+    </div>
+
+    <!-- 操作ボタン -->
+
+    <div class="button-row">
+
+        <button
+            class="btn next-btn"
+            onclick="saveWinPoint()">
+
+            次のポイントへ
+
+        </button>
+
+    </div>
+
+    <div class="button-row">
+
+        <button
+            class="btn red-btn"
+            onclick="abortMatch()">
+
+            記録リセット
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="../script.js"></script>
+
+<script>
+
+updateScoreBoard();
+
+/* 得点した人 */
+
+document
+.querySelectorAll(".player-btn")
+.forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+        document
+        .querySelectorAll(".player-btn")
+        .forEach(b =>
+            b.classList.remove("active")
+        );
+
+        btn.classList.add("active");
+
+        sessionStorage.setItem(
+            "winner",
+            btn.dataset.value
+        );
+
+    });
+
+});
+
+/* 得点要因 */
+
+document
+.querySelectorAll(".reason-btn")
+.forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+        document
+        .querySelectorAll(".reason-btn")
+        .forEach(b =>
+            b.classList.remove("active")
+        );
+
+        btn.classList.add("active");
+
+        sessionStorage.setItem(
+            "winReason",
+            btn.dataset.value
+        );
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

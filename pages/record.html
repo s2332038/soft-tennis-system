@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>試合記録</title>
+
+    <link rel="stylesheet"
+          href="../style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>試合記録</h1>
+
+    <!-- スコア表示 -->
+
+    <div class="score-board">
+
+        <div class="score-box">
+
+            <h2>ゲームカウント</h2>
+
+            <div id="gameCount">
+
+                0 : 0
+
+            </div>
+
+        </div>
+
+        <div class="score-box">
+
+            <h2>ポイント</h2>
+
+            <div id="pointCount">
+
+                0 : 0
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ポイントの始まり -->
+
+    <div class="card">
+
+        <h2>ポイントの始まり</h2>
+
+        <h3>ポジション</h3>
+
+        <div class="button-row">
+
+            <button
+                class="btn position-btn"
+                data-value="後衛">
+
+                後衛
+
+            </button>
+
+            <button
+                class="btn position-btn"
+                data-value="前衛">
+
+                前衛
+
+            </button>
+
+        </div>
+
+        <h3>開始状況</h3>
+
+        <div class="button-row">
+
+            <button
+                class="btn serve-btn"
+                data-value="1サーブ">
+
+                1サーブ
+
+            </button>
+
+            <button
+                class="btn serve-btn"
+                data-value="2サーブ">
+
+                2サーブ
+
+            </button>
+
+            <button
+                class="btn serve-btn"
+                data-value="レシーブ">
+
+                レシーブ
+
+            </button>
+
+        </div>
+
+        <h3>ラリー数</h3>
+
+        <select id="rallyCount">
+
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+
+        </select>
+
+    </div>
+
+    <!-- 戻るボタン -->
+
+    <div class="button-row">
+
+        <button
+            class="btn back-btn"
+            onclick="location.href='setup.html'">
+
+            初期設定に戻る
+
+        </button>
+
+        <button
+            class="btn back-btn"
+            onclick="undoPoint()">
+
+            １ポイント戻る
+
+        </button>
+
+    </div>
+
+    <!-- 得点・失点 -->
+
+    <div class="button-row">
+
+        <button
+            class="btn green-btn"
+            onclick="goWinPage()">
+
+            得点
+
+        </button>
+
+        <button
+            class="btn red-btn"
+            onclick="goLosePage()">
+
+            失点
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="../script.js"></script>
+
+<script>
+
+updateScoreBoard();
+
+/* 保存済み状態復元 */
+
+const savedPosition =
+sessionStorage.getItem(
+"startPosition"
+);
+
+if(savedPosition){
+
+document
+.querySelectorAll(".position-btn")
+.forEach(btn=>{
+
+if(
+btn.dataset.value
+=== savedPosition
+){
+
+btn.classList.add(
+"active"
+);
+
+}
+
+});
+
+}
+
+const savedServe =
+sessionStorage.getItem(
+"startServe"
+);
+
+if(savedServe){
+
+document
+.querySelectorAll(".serve-btn")
+.forEach(btn=>{
+
+if(
+btn.dataset.value
+=== savedServe
+){
+
+btn.classList.add(
+"active"
+);
+
+}
+
+});
+
+}
+
+/* 後衛・前衛 */
+
+document
+.querySelectorAll(".position-btn")
+.forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+document
+.querySelectorAll(".position-btn")
+.forEach(b=>
+b.classList.remove(
+"active"
+)
+);
+
+btn.classList.add(
+"active"
+);
+
+sessionStorage.setItem(
+"startPosition",
+btn.dataset.value
+);
+
+});
+
+});
+
+/* サーブ */
+
+document
+.querySelectorAll(".serve-btn")
+.forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+document
+.querySelectorAll(".serve-btn")
+.forEach(b=>
+b.classList.remove(
+"active"
+)
+);
+
+btn.classList.add(
+"active"
+);
+
+sessionStorage.setItem(
+"startServe",
+btn.dataset.value
+);
+
+});
+
+});
+
+</script>
+
+</body>
+
+</html>

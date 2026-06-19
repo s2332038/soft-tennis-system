@@ -1,0 +1,335 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Yu Gothic";
+}
+
+body{
+    background:#f5f7fa;
+}
+
+.container{
+    width:95%;
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    margin:30px 0;
+    color:#003366;
+}
+
+h2{
+    margin-bottom:20px;
+    color:#003366;
+}
+
+h3{
+    margin-top:15px;
+    margin-bottom:10px;
+    color:#003366;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+    margin-bottom:20px;
+}
+
+/* =========================
+   トップ画面
+========================= */
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.big-btn{
+    height:80px;
+    font-size:24px;
+    border:none;
+    border-radius:15px;
+    background:#0078d7;
+    color:white;
+    cursor:pointer;
+}
+
+.big-btn:hover{
+    background:#005eb8;
+}
+
+/* =========================
+   入力フォーム
+========================= */
+
+.form-group{
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-size:18px;
+}
+
+input,
+select{
+    width:100%;
+    padding:15px;
+    font-size:18px;
+    border:1px solid #ccc;
+    border-radius:10px;
+}
+
+/* =========================
+   ボタン
+========================= */
+
+.button-row{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.btn{
+    flex:1;
+    padding:18px;
+    min-height:60px;
+    font-size:20px;
+    border:none;
+    border-radius:10px;
+    color:white;
+    cursor:pointer;
+}
+
+.back-btn{
+    background:#666;
+}
+
+.back-btn:hover{
+    background:#555;
+}
+
+.next-btn{
+    background:#0078d7;
+}
+
+.next-btn:hover{
+    background:#005eb8;
+}
+
+.red-btn{
+    background:#d9534f;
+}
+
+.red-btn:hover{
+    background:#c9302c;
+}
+
+.green-btn{
+    background:#28a745;
+}
+
+.green-btn:hover{
+    background:#218838;
+}
+
+/* =========================
+   スコア表示
+========================= */
+
+.score-board{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:white;
+    padding:15px;
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+.score-box{
+    width:48%;
+    text-align:center;
+}
+
+.score-title{
+    font-size:20px;
+    margin-bottom:10px;
+    color:#003366;
+}
+
+.score-value{
+    font-size:30px;
+    font-weight:bold;
+}
+
+/* =========================
+   選択ボタン
+========================= */
+
+.choice-group{
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(120px,1fr)
+        );
+
+    gap:10px;
+}
+
+.choice-btn{
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:#e8eef5;
+    font-size:18px;
+    cursor:pointer;
+}
+
+/* record.html用 */
+
+.position-btn,
+.serve-btn,
+.player-btn,
+.reason-btn{
+
+    background:#e8eef5;
+    color:#333;
+
+}
+
+/* 選択状態 */
+
+.choice-btn.active,
+.active{
+
+    background:#0078d7 !important;
+    color:white !important;
+
+}
+
+/* =========================
+   要因ボタン用
+========================= */
+
+.button-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(150px,1fr)
+        );
+
+    gap:10px;
+
+}
+
+/* =========================
+   テーブル
+========================= */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+th{
+    background:#0078d7;
+    color:white;
+}
+
+th,
+td{
+    border:1px solid #ccc;
+    padding:10px;
+    text-align:center;
+}
+
+/* =========================
+   結果画面
+========================= */
+
+.result-section{
+    margin-bottom:20px;
+}
+
+.result-item{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+}
+
+/* =========================
+   分析画面
+========================= */
+
+.analysis-box{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:20px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+/* =========================
+   iPad対応
+========================= */
+
+@media (max-width:768px){
+
+    h1{
+        font-size:28px;
+    }
+
+    .big-btn{
+        height:70px;
+        font-size:22px;
+    }
+
+    .btn{
+        font-size:18px;
+        min-height:65px;
+    }
+
+    .button-row{
+        flex-direction:column;
+    }
+
+    .score-board{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .score-box{
+        width:100%;
+    }
+
+    .button-grid{
+
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
+            );
+
+    }
+
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>集計・分析</title>
+
+    <link rel="stylesheet"
+          href="../style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>集計・分析</h1>
+
+        <div class="card">
+
+            <h2>サーブ開始分析</h2>
+
+            <div id="serveAnalysis">
+
+                読み込み中...
+
+            </div>
+
+            <hr>
+
+            <h2>得点要因分析</h2>
+
+            <div id="winAnalysis">
+
+                読み込み中...
+
+            </div>
+
+            <hr>
+
+            <h2>失点要因分析</h2>
+
+            <div id="loseAnalysis">
+
+                読み込み中...
+
+            </div>
+
+        </div>
+
+        <div class="button-row">
+
+            <button
+                class="btn back-btn"
+                onclick="location.href='result.html'">
+
+                戻る
+
+            </button>
+
+            <button
+                class="btn green-btn"
+                onclick="saveMatchPDF()">
+
+                保存
+
+            </button>
+
+            <button
+                class="btn red-btn"
+                onclick="finishMatch()">
+
+                終了
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="../script.js"></script>
+
+    <script>
+
+        // 分析結果表示
+        showAnalysis();
+
+    </script>
+
+    <!-- PDF生成ライブラリ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+</body>
+
+</html>
