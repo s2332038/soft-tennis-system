@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>試合設定</title>
+
+<link rel="stylesheet" href="../style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>試合記録 初期設定</h1>
+
+<div class="card">
+
+<div class="form-group">
+<label>日付</label>
+<input type="date" id="date">
+</div>
+
+<div class="form-group">
+<label>タイトル</label>
+<input type="text" id="title">
+</div>
+
+<div class="form-group">
+<label>対戦相手</label>
+<input type="text" id="opponent">
+</div>
+
+<div class="form-group">
+<label>コート環境</label>
+
+<select id="court">
+<option>オムニ</option>
+<option>クレー</option>
+<option>ハード</option>
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>ゲーム数</label>
+
+<select id="gameType">
+<option value="5">5ゲームマッチ</option>
+<option value="7">7ゲームマッチ</option>
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>天気</label>
+
+<select id="weather">
+<option>晴れ</option>
+<option>曇り</option>
+<option>雨</option>
+<option>雨の後</option>
+<option>霧</option>
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>風</label>
+
+<select id="wind">
+<option>なし</option>
+<option>弱</option>
+<option>中</option>
+<option>強</option>
+</select>
+
+</div>
+
+</div>
+
+<div class="button-row">
+
+<button
+class="btn back-btn"
+onclick="location.href='../index.html'">
+
+戻る
+
+</button>
+
+<button
+class="btn next-btn"
+onclick="saveSetupData()">
+
+次へ
+
+</button>
+
+</div>
+
+</div>
+
+<script src="../script.js"></script>
+
+<script>
+
+function saveSetupData(){
+
+const data=getData();
+
+data.setup={
+
+date:
+document.getElementById("date").value,
+
+title:
+document.getElementById("title").value,
+
+opponent:
+document.getElementById("opponent").value,
+
+court:
+document.getElementById("court").value,
+
+gameType:
+document.getElementById("gameType").value,
+
+weather:
+document.getElementById("weather").value,
+
+wind:
+document.getElementById("wind").value
+
+};
+
+saveData(data);
+
+location.href="record.html";
+
+}
+
+</script>
+
+</body>
+</html>
