@@ -1078,6 +1078,232 @@ function showAnalysis() {
     loseHtml += `</table>`;
 
     loseArea.innerHTML = loseHtml;
+    //--------------------------------
+    // 得点・失点推移グラフ
+    //--------------------------------
+
+    const scoreLabels = [];
+
+    const scoreData = [];
+
+    data.records.forEach((r,index) => {
+
+        scoreLabels.push(index + 1);
+
+        if(r.type === "win"){
+
+            scoreData.push(1);
+
+        }else{
+
+            scoreData.push(0);
+
+        }
+
+    });
+
+    const scoreCanvas =
+        document.getElementById(
+            "scoreChart"
+        );
+
+    if(scoreCanvas){
+
+        new Chart(
+            scoreCanvas,
+            {
+
+                type:"line",
+
+                data:{
+
+                    labels:scoreLabels,
+
+                    datasets:[{
+
+                        label:
+                        "得点=1 失点=0",
+
+                        data:scoreData,
+
+                        tension:0.2
+
+                    }]
+
+                },
+
+                options:{
+
+                    responsive:true,
+
+                    scales:{
+
+                        y:{
+
+                            min:0,
+
+                            max:1,
+
+                            ticks:{
+
+                                stepSize:1
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
+
+    //--------------------------------
+    // 得点要因棒グラフ
+    //--------------------------------
+
+    const winLabels = [];
+
+    const winData = [];
+
+    for(let key in winCount){
+
+        winLabels.push(key);
+
+        winData.push(
+            winCount[key]
+        );
+
+    }
+
+    const winCanvas =
+        document.getElementById(
+            "winChart"
+        );
+
+    if(winCanvas){
+
+        new Chart(
+            winCanvas,
+            {
+
+                type:"bar",
+
+                data:{
+
+                    labels:winLabels,
+
+                    datasets:[{
+
+                        label:"得点回数",
+
+                        data:winData
+
+                    }]
+
+                },
+
+                options:{
+
+                    responsive:true,
+
+                    plugins:{
+
+                        legend:{
+                            display:false
+                        }
+
+                    },
+
+                    scales:{
+
+                        y:{
+                            beginAtZero:true
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
+
+    //--------------------------------
+    // 失点要因棒グラフ
+    //--------------------------------
+
+    const loseLabels = [];
+
+    const loseData = [];
+
+    for(let key in loseCount){
+
+        loseLabels.push(key);
+
+        loseData.push(
+            loseCount[key]
+        );
+
+    }
+
+    const loseCanvas =
+        document.getElementById(
+            "loseChart"
+        );
+
+    if(loseCanvas){
+
+        new Chart(
+            loseCanvas,
+            {
+
+                type:"bar",
+
+                data:{
+
+                    labels:loseLabels,
+
+                    datasets:[{
+
+                        label:"失点回数",
+
+                        data:loseData
+
+                    }]
+
+                },
+
+                options:{
+
+                    responsive:true,
+
+                    plugins:{
+
+                        legend:{
+                            display:false
+                        }
+
+                    },
+
+                    scales:{
+
+                        y:{
+                            beginAtZero:true
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
 
 }
 

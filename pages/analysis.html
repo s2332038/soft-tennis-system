@@ -22,6 +22,8 @@
         <h1>集計・分析</h1>
 
         <div class="card">
+            <h2>得点・失点推移</h2>
+            <canvas id="scoreChart"></canvas>
 
             <h2>サーブ開始分析</h2>
 
@@ -33,6 +35,10 @@
 
             <hr>
 
+            <canvas id="winChart"></canvas>
+
+            <hr>
+
             <h2>得点要因分析</h2>
 
             <div id="winAnalysis">
@@ -40,6 +46,10 @@
                 読み込み中...
 
             </div>
+
+            <hr>
+
+            <canvas id="loseChart"></canvas>
 
             <hr>
 
@@ -83,6 +93,7 @@
 
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../script.js"></script>
 
     <script>
