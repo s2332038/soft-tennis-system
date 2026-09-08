@@ -1078,77 +1078,249 @@ function showAnalysis() {
     loseHtml += `</table>`;
 
     loseArea.innerHTML = loseHtml;
+//--------------------------------
+// 得点・失点推移グラフ
+//--------------------------------
+
+const scoreLabels = [];
+const scoreData = [];
+const gameBoundaries = [];
+
+//--------------------------------
+// 各ポイントのデータ作成
+//--------------------------------
+
+data.records.forEach((r, index) => {
+
+    scoreLabels.push(index + 1);
+
     //--------------------------------
-    // 得点・失点推移グラフ
+    // 得点 = 1
+    // 失点 = 0
     //--------------------------------
 
-    const scoreLabels = [];
+    if (r.type === "win") {
 
-    const scoreData = [];
+        scoreData.push(1);
 
-    data.records.forEach((r,index) => {
+    } else {
 
-        scoreLabels.push(index + 1);
+        scoreData.push(0);
 
-        if(r.type === "win"){
+    }
 
-            scoreData.push(1);
+    //--------------------------------
+    // ゲーム切り替わりを確認
+    //--------------------------------
 
-        }else{
+    if (index > 0) {
 
-            scoreData.push(0);
+        const previousGame =
+            data.records[index - 1].game;
+
+        const currentGame =
+            r.game;
+
+        if (previousGame !== currentGame) {
+
+            gameBoundaries.push(index);
 
         }
 
-    });
+    }
 
-    const scoreCanvas =
-        document.getElementById(
-            "scoreChart"
-        );
+});
 
-    if(scoreCanvas){
+//--------------------------------
+// グラフ描画
+//--------------------------------
 
+const scoreCanvas =
+    document.getElementById(
+        "scoreChart"
+    );
+
+if (scoreCanvas) {
+
+    //--------------------------------
+    // 既存グラフがあれば削除
+    //--------------------------------
+
+    if (window.scoreChartInstance) {
+
+        window.scoreChartInstance.destroy();
+
+    }
+
+    //--------------------------------
+    // ゲーム境界を縦線で表示する
+    //--------------------------------
+
+    const gameBoundaryPlugin = {
+
+        id: "gameBoundaryPlugin",
+
+        afterDraw(chart) {
+
+            const {
+                ctx,
+                chartArea,
+                scales
+            } = chart;
+
+            const xScale =
+                scales.x;
+
+            if (!xScale) return;
+
+            ctx.save();
+
+            ctx.setLineDash([
+                5,
+                5
+            ]);
+
+            ctx.lineWidth = 1;
+
+            //--------------------------------
+            // ゲーム切り替わり位置に縦線
+            //--------------------------------
+
+            gameBoundaries.forEach(index => {
+
+                const x =
+                    xScale.getPixelForValue(
+                        index
+                    );
+
+                ctx.beginPath();
+
+                ctx.moveTo(
+                    x,
+                    chartArea.top
+                );
+
+                ctx.lineTo(
+                    x,
+                    chartArea.bottom
+                );
+
+                ctx.stroke();
+
+            });
+
+            ctx.restore();
+
+        }
+
+    };
+
+    //--------------------------------
+    // グラフ作成
+    //--------------------------------
+
+    window.scoreChartInstance =
         new Chart(
+
             scoreCanvas,
+
             {
 
-                type:"line",
+                type: "line",
 
-                data:{
+                data: {
 
-                    labels:scoreLabels,
+                    labels: scoreLabels,
 
-                    datasets:[{
+                    datasets: [
 
-                        label:
-                        "得点=1 失点=0",
+                        {
 
-                        data:scoreData,
+                            label:
+                                "得点=1 失点=0",
 
-                        tension:0.2
+                            data:
+                                scoreData,
 
-                    }]
+                            tension: 0.2,
+
+                            fill: false
+
+                        }
+
+                    ]
 
                 },
 
-                options:{
+                plugins: [
+                    gameBoundaryPlugin
+                ],
 
-                    responsive:true,
+                options: {
 
-                    scales:{
+                    responsive: true,
 
-                        y:{
+                    maintainAspectRatio: true,
 
-                            min:0,
+                    scales: {
 
-                            max:1,
+                        y: {
 
-                            ticks:{
+                            min: 0,
 
-                                stepSize:1
+                            max: 1,
+
+                            ticks: {
+
+                                stepSize: 1,
+
+                                callback:
+                                    function(value) {
+
+                                        if (
+                                            value === 1
+                                        ) {
+
+                                            return "得点";
+
+                                        }
+
+                                        if (
+                                            value === 0
+                                        ) {
+
+                                            return "失点";
+
+                                        }
+
+                                        return value;
+
+                                    }
 
                             }
+
+                        },
+
+                        x: {
+
+                            title: {
+
+                                display: true,
+
+                                text:
+                                    "ポイント"
+
+                            }
+
+                        }
+
+                    },
+
+                    plugins: {
+
+                        legend: {
+
+                            display: true
 
                         }
 
@@ -1157,9 +1329,10 @@ function showAnalysis() {
                 }
 
             }
+
         );
 
-    }
+}
 
     //--------------------------------
     // 得点要因棒グラフ
